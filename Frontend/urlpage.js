@@ -15,7 +15,7 @@ const copyButton = document.getElementById("copylink");
 
 if (copyButton) {
     copyButton.addEventListener("click", () => {
-        navigator.clipboard.writeText("https://palm-luxe-empire.vercel.app/");
+        navigator.clipboard.writeText("https://dezubikpharmacy.vercel.app/");
         alert("link copied!");
     });
 }

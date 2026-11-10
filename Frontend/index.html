@@ -13,7 +13,7 @@
 </head>
 <body  >
   
-<nav id="navbar" class="bg-white   shadow-md fixed z-50 w-full top-0 h-auto space-y-2">
+<nav id="navbar" class="bg-white   shadow-md fixed z-50 w-full top-0 h-auto space-y-2 pb-6">
    
   <div class="max-w-7xl mx-auto px-6 flex   justify-between ">
     
@@ -150,7 +150,7 @@ style="font-family: 'Times New Roman', Times, serif;">
 
 
 
-<div class="pt-40 flex justify-center items-center pb-10"><img src="./images/IMG-20261109-WA0010.jpg" alt="" class="w-55 animate-gentle"></div>  
+<div class="pt-48 flex justify-center items-center pb-10"><img src="./images/IMG-20261109-WA0010.jpg" alt="" class="w-55 animate-gentle"></div>  
   </div>
 
 
@@ -667,6 +667,10 @@ style="font-family: 'Times New Roman', Times, serif;">
 
 
 
+
+
+
+
 <div class="max-w-7xl mx-auto px-6  ">
     <div class="flex flex-col  justify-between items-center gap-4 mb-10">
 <div class="flex-1">
@@ -716,7 +720,19 @@ shadow-md rounded-full mb-6 w-75 h-75"><img src="./images/IMG-20261109-WA0010.jp
 
 
 
+<!---hero section----->
+  <section class=" max-w-7xl mx-auto px-6  overflow-hidden ">
+    <div class=" flex justify-center items-center">
+      <div class="relative" >
+        <img id="photo" src="./images/download (67).jfif" class="  rounded-full shadow-md h-75 w-75 lg:h-200  lg:w-200  object-cover">
+        <div class="absolute inset-0 flex justify-center items-center">
 
+        </div>
+      </div>
+
+    </div>
+
+  </section>
 
 
 <!-------footer-->
@@ -1137,6 +1153,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+<script>
+const images = [
+      "images/Pharma Industry – Digital Marketing Strategies For Pharma And Healthcare Sector.jfif" , 
+      "images/повестка дня.jfif",
+      
+      "images/download (68).jfif",
+      "images/Constant Contact _ Library.jfif",
+      "images/💊✨ (1).jfif"
+  ];
+
+    let currentIndex = 0;
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      document.getElementById("photo").src = images[currentIndex];
+    }, 3000);
+
+    function changeImage() {
+      currentIndex = (currentIndex + 1) % images.length;
+      document.getElementById("photo").src = images[currentIndex];
+    };
+</script>
+ 
 
 <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 <script src="./livechat.js"></script>
