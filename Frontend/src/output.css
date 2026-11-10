@@ -717,6 +717,9 @@
   .object-cover {
     object-fit: cover;
   }
+  .p-0 {
+    padding: 0;
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -737,6 +740,9 @@
   }
   .p-10 {
     padding: calc(var(--spacing) * 10);
+  }
+  .p-20 {
+    padding: calc(var(--spacing) * 20);
   }
   .px-2 {
     padding-inline: calc(var(--spacing) * 2);
@@ -759,6 +765,9 @@
   .px-10 {
     padding-inline: calc(var(--spacing) * 10);
   }
+  .px-20 {
+    padding-inline: calc(var(--spacing) * 20);
+  }
   .py-1 {
     padding-block: var(--spacing);
   }
@@ -773,6 +782,9 @@
   }
   .py-10 {
     padding-block: calc(var(--spacing) * 10);
+  }
+  .py-20 {
+    padding-block: calc(var(--spacing) * 20);
   }
   .py-50 {
     padding-block: calc(var(--spacing) * 50);
@@ -1051,6 +1063,11 @@
       height: calc(var(--spacing) * 100);
     }
   }
+  .lg\:h-150 {
+    @media (width >= 64rem) {
+      height: calc(var(--spacing) * 150);
+    }
+  }
   .lg\:h-200 {
     @media (width >= 64rem) {
       height: calc(var(--spacing) * 200);
@@ -1059,6 +1076,11 @@
   .lg\:w-100 {
     @media (width >= 64rem) {
       width: calc(var(--spacing) * 100);
+    }
+  }
+  .lg\:w-150 {
+    @media (width >= 64rem) {
+      width: calc(var(--spacing) * 150);
     }
   }
   .lg\:w-200 {
