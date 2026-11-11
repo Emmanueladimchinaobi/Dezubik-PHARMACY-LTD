@@ -157,7 +157,7 @@ if (placeOrderBtn) {
 
         try {
 
-            const response = await fetch("https://dezubik-pharmacy-ltd.onrender.com",   {
+            const response = await fetch("https://dezubik-pharmacy-ltd.onrender.com/api/orders",   {
 
                 method: "POST",
 
