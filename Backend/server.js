@@ -67,7 +67,7 @@ app.use("/api/messages", messageRoutes);
 // Home Route
 app.get("/", (req, res) => {
 
-    res.send("luxelingeriebyella Backend Running...");
+    res.send("https://dezubik-pharmacy-ltd.onrender.com Backend Running...");
 
 });
 
