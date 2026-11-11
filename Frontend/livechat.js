@@ -14,7 +14,7 @@ if (!visitorId) {
 
 
 // Connect to backend
-const socket = io("https://palm-luxe-empire.onrender.com");
+const socket = io("https://dezubik-pharmacy-ltd.onrender.com");
 
 
 // Socket connected
