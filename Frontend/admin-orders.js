@@ -61,7 +61,7 @@ async function loadOrders() {
 
                 itemsHTML += `
 
-                    <div class="flex gap-4 border rounded-lg p-4 mt-4">
+                    <div class="flex flex-col gap-4 border rounded-lg p-4 mt-4">
 
                         <img
                             src="${item.image}"
