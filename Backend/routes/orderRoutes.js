@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Order = require("../models/Order");
 const sendOrderEmail = require("../utils/sendOrderEmail");
+const requireAdmin = require("../middleware/requireAdmin");
 
 // Create a new order
-router.post("/", async (req, res) => {
+router.get("/", requireAdmin, async (req, res) => {
     console.log("POST /api/orders hit");
     console.log(req.body);
 
@@ -50,7 +51,7 @@ router.get("/", async (req, res) => {
 
 
 // Delete an order
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", requireAdmin, async (req, res) => {
 
     try {
 

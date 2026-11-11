@@ -1,29 +1,124 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link
-        rel="stylesheet"
-        href="./src/output.css">
+    <link rel="stylesheet" href="./src/output.css">
 
-    <title>Admin Dashboard</title>
-
+    <title>Dezubik Pharmacy | Admin</title>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen">
 
-    <div class="max-w-7xl mx-auto py-10 px-6">
+    <!-- AUTHENTICATION CHECK -->
+    <div id="auth-loading"
+         class="min-h-screen flex items-center justify-center">
 
-        <h1 class="text-4xl font-bold mb-8">
-            Admin Dashboard
-        </h1>
+        <p class="text-gray-600 font-semibold">
+            Checking admin authentication...
+        </p>
+
+    </div>
+
+
+    <!-- LOGIN PAGE -->
+    <section id="login-section"
+             class="hidden min-h-screen flex items-center justify-center px-5">
+
+        <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md">
+
+            <h1 class="text-3xl font-bold text-center mb-2">
+                Dezubik Pharmacy
+            </h1>
+
+            <p class="text-gray-500 text-center mb-8">
+                Administrator Login
+            </p>
+
+            <form id="admin-login-form">
+
+                <label class="block font-semibold mb-2">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="admin-username"
+                    value="Dezubik"
+                    autocomplete="username"
+                    required
+                    class="w-full border rounded-lg p-3 mb-5 text-black"
+                >
+
+                <label class="block font-semibold mb-2">
+                    Password
+                </label>
+
+                <div class="flex gap-2">
+
+                    <input
+                        type="password"
+                        id="admin-password"
+                        autocomplete="current-password"
+                        required
+                        class="w-full border rounded-lg p-3 text-black"
+                    >
+
+                    <button
+                        type="button"
+                        id="toggle-password"
+                        class="bg-gray-200 px-3 rounded-lg">
+
+                        Show
+
+                    </button>
+
+                </div>
+
+                <p id="login-error"
+                   class="text-red-600 text-sm mt-4">
+                </p>
+
+                <button
+                    type="submit"
+                    id="login-button"
+                    class="w-full bg-black text-white p-3 rounded-lg mt-5 font-semibold">
+
+                    Login
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- ADMIN DASHBOARD -->
+    <main id="admin-dashboard"
+          class="hidden max-w-7xl mx-auto py-10 px-6">
+
+        <div class="flex justify-between items-center flex-wrap gap-4 mb-8">
+
+            <h1 class="text-3xl md:text-4xl font-bold">
+                Admin Dashboard
+            </h1>
+
+            <button
+                id="logout-button"
+                class="bg-red-600 text-white px-5 py-3 rounded-lg">
+
+                Logout
+
+            </button>
+
+        </div>
 
 
         <!-- ORDERS -->
@@ -34,11 +129,7 @@
                 Customer Orders
             </h2>
 
-            <div
-                id="orders"
-                class="space-y-6">
-
-            </div>
+            <div id="orders" class="space-y-6"></div>
 
         </section>
 
@@ -63,20 +154,15 @@
 
         </section>
 
-    </div>
+    </main>
 
 
-    <!-- Socket.IO -->
+    <!-- SOCKET.IO -->
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
 
-    <script
-        src="https://cdn.socket.io/4.8.1/socket.io.min.js">
-    </script>
-
-
-    <!-- Admin JavaScript -->
-
+    <!-- AUTHENTICATION SCRIPT -->
+    <script src="./admin-auth.js"></script>
     <script src="./admin-orders.js"></script>
 
 </body>
-
 </html>

@@ -1,10 +1,14 @@
+
 const express = require("express");
 
 const router = express.Router();
 
 const Message = require("../models/Message");
 
-router.get("/", async (req, res) => {
+const requireAdmin = require("../middleware/requireAdmin");
+
+// Get all customer messages - ADMIN ONLY
+router.get("/", requireAdmin, async (req, res) => {
 
     try {
 
@@ -16,8 +20,11 @@ router.get("/", async (req, res) => {
 
     } catch (err) {
 
+        console.error("Message retrieval error:", err);
+
         res.status(500).json({
-            message: err.message
+            success: false,
+            message: "Failed to retrieve messages."
         });
 
     }

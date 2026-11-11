@@ -12,9 +12,12 @@ async function loadOrders() {
 
     try {
 
-        const response = await fetch(
-            `${BACKEND}/api/orders`
-        );
+       const response = await fetch(
+    `${BACKEND}/api/orders`,
+    {
+        credentials: "include"
+    }
+);
 
         if (!response.ok) {
 
@@ -196,9 +199,13 @@ async function loadOrders() {
 // ADMIN CHAT
 // ==========================================
 
-const socket =
-    io(BACKEND);
-
+const socket = io(BACKEND, {
+    withCredentials: true
+});
+socket.on("admin_auth_error", () => {
+    alert("Your admin session has expired. Please log in again.");
+    window.location.reload();
+});
 
 let messages = [];
 
