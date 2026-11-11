@@ -30,7 +30,7 @@ const io = new Server(server, {
 
             "http://localhost:5500",
             "http://127.0.0.1:5500",
-            "https://luxelingeriebyella.vercel.app"
+            "https://dezubikpharmacy.vercel.app"
 
         ],
 
@@ -47,7 +47,7 @@ app.use(cors({
 
         "http://localhost:5500",
         "http://127.0.0.1:5500",
-        "https://luxelingeriebyella.vercel.app"
+        "https://dezubikpharmacy.vercel.app"
 
     ],
 
