@@ -28,7 +28,7 @@ cart.forEach(item => {
 
     summary.innerHTML += `
 
-    <div class="flex flex-col md:flex-row gap-4 mb-6 border-b pb-6 ">
+    <div class="flex gap-4 mb-6 border-b pb-6 flex-col">
 
         <img
             src="${item.image}"
@@ -37,13 +37,18 @@ cart.forEach(item => {
 
         <div class="flex-1">
 
-            <h3 class="font-bold text-sm">
+            <h3 class="font-bold text-lg">
                 ${item.name}
             </h3>
 
-            
-
-            <p class="">
+            <p class="text-gray-500">
+                Size: <strong>${item.size}</strong>
+            </p>
+         
+                <p class="text-gray-500">
+                    Colour: <strong>${item.colour}</strong>
+                </p>
+            <p class="text-gray-500">
                 Quantity: ${item.quantity}
             </p>
 
@@ -78,7 +83,7 @@ const copyButton = document.getElementById("copyAccount");
 
 if (copyButton) {
     copyButton.addEventListener("click", () => {
-        navigator.clipboard.writeText("1010595537");
+        navigator.clipboard.writeText("0123456789");
         alert("Account number copied!");
     });
 }
@@ -102,18 +107,18 @@ if (placeOrderBtn) {
         placeOrderBtn.textContent = "Placing Order...";
 
         const customerName = document.getElementById("customerName").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const address = document.getElementById("address").value.trim();
 
-        if (!customerName || !email || !phone || !address) {
+        const phone = document.getElementById("phone").value.trim();
+
+        const address = document.getElementById("address").value.trim();
+        const state = document.getElementById("state").value.trim();
+
+        if (!customerName || !phone || !address || !state) {
 
             alert("Please fill in all customer details.");
 
-            placeOrderBtn.disabled = false;
-            placeOrderBtn.textContent = "Place Order";
-
             return;
+
         }
 
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -122,40 +127,57 @@ if (placeOrderBtn) {
 
             alert("Your cart is empty.");
 
-            placeOrderBtn.disabled = false;
-            placeOrderBtn.textContent = "Place Order";
-
             return;
+
         }
 
         const total = cart.reduce((sum, item) => {
+
             return sum + (item.price * item.quantity);
+
         }, 0);
 
         const order = {
+
             customerName,
-            email,
+
             phone,
+
             address,
+            
+            state,
+
             items: cart,
+
             total,
+
             paymentMethod: "Bank Transfer"
+
         };
 
         try {
 
-            const response = await fetch("https://dezubik-pharmacy-ltd.onrender.com/api/orders", {
+            const response = await fetch("https://dezubik-pharmacy-ltd.onrender.com",   {
+
                 method: "POST",
+
                 headers: {
+
                     "Content-Type": "application/json"
+
                 },
+
                 body: JSON.stringify(order)
+
             });
 
-            if (!response.ok) {
-                const errorText = await response.text();
-                throw new Error(errorText);
-            }
+           if (!response.ok) {
+
+    const errorText = await response.text();
+
+    throw new Error(errorText);
+
+}
 
             alert("Order placed successfully!");
 
@@ -163,16 +185,13 @@ if (placeOrderBtn) {
 
             window.location.href = "index.html";
 
-        } catch (error) {
+ } catch (error) {
 
-            console.error(error);
+    console.error(error);
 
-            alert(error.message);
+    alert(error.message);
 
-            // Re-enable button if order fails
-            placeOrderBtn.disabled = false;
-            placeOrderBtn.textContent = "Place Order";
-        }
+}
 
     });
 
