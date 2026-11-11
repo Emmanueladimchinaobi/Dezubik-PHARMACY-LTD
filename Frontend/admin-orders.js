@@ -75,13 +75,7 @@ async function loadOrders() {
                                 ${item.name}
                             </h3>
 
-                            <p>
-                                Size: ${item.size}
-                            </p>
-
-                            <p>
-                                Colour: ${item.colour}
-                            </p>
+                           
 
                             <p>
                                 Quantity: ${item.quantity}
