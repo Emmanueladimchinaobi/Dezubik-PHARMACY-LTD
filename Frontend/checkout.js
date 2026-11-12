@@ -32,7 +32,7 @@ cart.forEach(item => {
 
         <img
             src="${item.image}"
-            class="w-24 h-24 rounded-lg object-cover"
+            class="w-24 h-24 rounded-lg object-contain"
         >
 
         <div class="flex-1">
@@ -41,13 +41,7 @@ cart.forEach(item => {
                 ${item.name}
             </h3>
 
-            <p class="text-gray-500">
-                Size: <strong>${item.size}</strong>
-            </p>
-         
-                <p class="text-gray-500">
-                    Colour: <strong>${item.colour}</strong>
-                </p>
+            
             <p class="text-gray-500">
                 Quantity: ${item.quantity}
             </p>
