@@ -1,7 +1,5 @@
 console.log("Admin Dashboard Loaded");
 
-const BACKEND =
-    "https://dezubik-pharmacy-ltd.onrender.com";
 
 
 // ==========================================

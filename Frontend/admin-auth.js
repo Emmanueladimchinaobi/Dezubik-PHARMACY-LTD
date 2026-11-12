@@ -30,8 +30,7 @@ function showDashboard() {
 
         const script = document.createElement("script");
 
-        
-
+        script.src = "./admin-orders.js";
         script.onload = () => {
             dashboardLoaded = true;
             console.log("Admin orders script loaded successfully.");
