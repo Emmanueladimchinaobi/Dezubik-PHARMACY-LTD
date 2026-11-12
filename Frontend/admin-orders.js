@@ -8,190 +8,136 @@ const BACKEND =
 // ORDERS
 // ==========================================
 
+
 async function loadOrders() {
+
+    const container = document.getElementById("orders");
+
+    container.innerHTML = "<p>Connecting to orders server...</p>";
 
     try {
 
-       const response = await fetch(
-    `${BACKEND}/api/orders`,
-    {
-        credentials: "include"
-    }
-);
+        const response = await fetch(
+            `${BACKEND}/api/orders`,
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
 
-        if (!response.ok) {
+        console.log("ORDERS HTTP STATUS:", response.status);
 
-            throw new Error(
-                "Failed to fetch orders"
-            );
+        const responseText = await response.text();
 
+        console.log("ORDERS RAW RESPONSE:", responseText);
+
+        let orders;
+
+        try {
+            orders = JSON.parse(responseText);
+        } catch {
+            throw new Error("Backend did not return valid JSON.");
         }
 
-        const orders =
-            await response.json();
+        if (!response.ok) {
+            throw new Error(
+                `HTTP ${response.status}: ${
+                    orders.message || "Orders request rejected"
+                }`
+            );
+        }
 
-        const container =
-            document.getElementById("orders");
+        if (!Array.isArray(orders)) {
+            throw new Error("Orders response is not an array.");
+        }
+
+        console.log("ORDERS RECEIVED:", orders.length);
 
         container.innerHTML = "";
 
-
         if (orders.length === 0) {
-
             container.innerHTML = `
-
                 <div class="bg-white shadow rounded-lg p-8 text-center">
-
-                    <h2 class="text-2xl font-bold">
-                        No Orders Yet
-                    </h2>
-
+                    <h2 class="text-2xl font-bold">No Orders Yet</h2>
                 </div>
-
             `;
-
             return;
-
         }
 
-
+        // Reuse your existing order rendering logic here.
         orders.forEach(order => {
 
             let itemsHTML = "";
 
-
-            order.items.forEach(item => {
+            (order.items || []).forEach(item => {
 
                 itemsHTML += `
-
-                    <div class="flex flex-col gap-4 border rounded-lg p-4 mt-4">
-
+                    <div class="flex gap-4 border rounded-lg p-4 mt-4">
                         <img
-                            src="${item.image}"
-                            class="w-35 h-35 rounded object-cover"
-                            alt="${item.name}"
+                            src="${escapeHTML(item.image || "")}"
+                            class="w-24 h-24 rounded object-cover"
+                            alt="${escapeHTML(item.name || "Product")}"
                         >
 
-                        <div class="flex-1">
-
-                            <h3 class="font-bold text-lg">
-                                ${item.name}
+                        <div>
+                            <h3 class="font-bold">
+                                ${escapeHTML(item.name || "")}
                             </h3>
 
-                           
+                            <p>Quantity: ${Number(item.quantity) || 0}</p>
 
                             <p>
-                                Quantity: ${item.quantity}
+                                ₦${(Number(item.price) || 0).toLocaleString()}
                             </p>
-
-                            <p class="font-semibold">
-                                ₦${item.price.toLocaleString()}
-                            </p>
-
                         </div>
-
                     </div>
-
                 `;
-
             });
 
+            const card = document.createElement("div");
 
-            container.innerHTML += `
+            card.className =
+                "bg-white shadow-lg rounded-xl p-6 mb-8";
 
-                <div class="bg-white shadow-lg rounded-xl p-6 mb-8">
+            card.innerHTML = `
+                <h2 class="text-2xl font-bold">
+                    ${escapeHTML(order.customerName || "")}
+                </h2>
 
-                    <div class="flex justify-between items-start">
+                <p>${escapeHTML(order.phone || "")}</p>
+                <p>${escapeHTML(order.address || "")}</p>
+                <p>${escapeHTML(order.state || "")}</p>
 
-                        <div>
+                <h2 class="text-2xl font-bold text-green-600 mt-4">
+                    ₦${(Number(order.total) || 0).toLocaleString()}
+                </h2>
 
-                            <h2 class="text-2xl font-bold">
-                                ${order.customerName}
-                            </h2>
+                ${itemsHTML}
 
-                            <p class="text-gray-600">
-                                ${order.phone}
-                            </p>
-
-                            <p class="text-gray-600">
-                                ${order.address}
-                            </p>
-
-                            <p class="text-gray-600">
-                                ${order.state}
-                            </p>
-
-                        </div>
-
-
-                        <div class="text-right">
-
-                            <p class="font-semibold">
-                                Total
-                            </p>
-
-                            <h2 class="text-3xl font-bold text-green-600">
-                                ₦${order.total.toLocaleString()}
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-
-                    ${itemsHTML}
-
-
-                    <div class="mt-6 flex flex-wrap gap-3">
-
-                        <span class="bg-yellow-200 px-4 py-2 rounded-full font-medium">
-                            Payment method: Bank transfer
-                        </span>
-
-                      
-
-                    </div>
-
-
-                    <div class="mt-6 text-sm text-gray-500">
-
-                        Ordered on:
-                        ${new Date(
-                            order.createdAt
-                        ).toLocaleString()}
-
-                    </div>
-
-                </div>
-
+                <p class="mt-4 text-gray-500">
+                    Ordered on:
+                    ${order.createdAt
+                        ? new Date(order.createdAt).toLocaleString()
+                        : "Unknown"}
+                </p>
             `;
+
+            container.appendChild(card);
 
         });
 
-    }
+    } catch (error) {
 
-    catch (error) {
+        console.error("ORDERS FETCH ERROR:", error);
 
-        console.error(error);
-
-        document.getElementById(
-            "orders"
-        ).innerHTML = `
-
+        container.innerHTML = `
             <div class="bg-red-100 text-red-700 p-6 rounded-lg">
-
-                Failed to load orders.
-
-                <br><br>
-
-                ${error.message}
-
+                <h3 class="font-bold">Failed to load orders</h3>
+                <p>${escapeHTML(error.message)}</p>
             </div>
-
         `;
 
     }
-
 }
 
 
