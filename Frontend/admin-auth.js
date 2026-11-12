@@ -30,7 +30,7 @@ function showDashboard() {
 
         const script = document.createElement("script");
 
-        script.src = "./admin-orders.js";
+        
 
         script.onload = () => {
             dashboardLoaded = true;
