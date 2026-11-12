@@ -1010,6 +1010,16 @@
     }
   }
 }
+.zoomed{
+  position:fixed;
+  inset: 0;
+  
+  height: 75vh;
+  object-fit: cover;
+  background: #fff;
+  z-index: 999;
+  cursor: zoom-out;
+}
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
