@@ -34,7 +34,7 @@ function displayCart() {
 
             <img
                 src="${item.image}"
-                class="w-75 h-100 object-contain rounded-lg animate-gentle"
+                class="w-75 h-100 object-cover rounded-lg animate-gentle"
             >
 
             <div class="flex-1 ">
