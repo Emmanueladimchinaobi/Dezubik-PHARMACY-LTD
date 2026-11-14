@@ -147,7 +147,7 @@ results.forEach(product => {
 
     const price = document.createElement("p");
 
-    price.className = "text-pink-700 font-bold";
+    price.className = "text-black font-bold";
 
     price.textContent = product.price
         ? "₦" + Number(product.price).toLocaleString("en-NG")
