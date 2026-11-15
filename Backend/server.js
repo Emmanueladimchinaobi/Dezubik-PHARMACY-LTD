@@ -24,8 +24,8 @@ const allowedOrigins = [
     "http://localhost:5500",
     "http://127.0.0.1:5500",
     "https://dezubikpharmacy.vercel.app",
-    "https://dezubikpharmacy.com.ng/",
-    "https://www.dezubikpharmacy.com.ng/",
+    "https://dezubikpharmacy.com.ng",
+    "https://www.dezubikpharmacy.com.ng",
 ];
 
 // CORS
