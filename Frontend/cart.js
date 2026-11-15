@@ -30,11 +30,11 @@ function displayCart() {
 
         cartItems.innerHTML += `
 
-        <div class="text-black rounded-xl shadow-lg p-5  flex flex-col items-center md:flex-row gap-8  ">
+        <div class="text-black rounded-xl shadow-lg p-5  flex flex-col items-center md:flex-row md:gap-8  ">
 
             <img
                 src="${item.image}"
-                class="w-75  object-cover rounded-lg animate-gentle"
+                class="w-75  object-contain rounded-lg "
             >
 
             <div class="flex-1 ">
